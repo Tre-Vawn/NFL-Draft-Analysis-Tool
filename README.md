@@ -1,4 +1,4 @@
-# NFL-Draft-Analysis-Tool
+# NFL Draft Analysis Tool
 
 ## Software Needed
 
