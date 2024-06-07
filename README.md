@@ -17,4 +17,4 @@
 8. Open browser and navigate to local host specified
 
 # Functionality
-A user can prompt for various 2023 NFL Draft related information such as team's picks, prospect's college profiles, as well as their college statisics.
+A user can prompt for various 2023 NFL Draft related information such as team's picks, prospect's college profiles, as well as their college statistics.
