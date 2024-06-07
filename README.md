@@ -21,4 +21,4 @@
 
 ## Functionality
 
-A user can prompt for various 2023 NFL Draft related information such as team's picks, prospect's college profiles, as well as their college statistics.
+A user can prompt for various 2024 NFL Draft related information such as team's picks, prospect's college profiles, as well as their college statistics.
