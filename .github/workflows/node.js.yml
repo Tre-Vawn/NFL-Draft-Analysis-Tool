@@ -18,19 +18,22 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+          cache-dependency-path: |
+            ./backend/package-lock.json
+            ./frontend/package-lock.json
 
       - name: List root directory
         run: ls -al /home/runner/work/NFL-Draft-Analysis-Tool/NFL-Draft-Analysis-Tool
 
       - name: List backend directory
-        run: ls -al backend
+        run: ls -al ./backend
 
       - name: List frontend directory
-        run: ls -al frontend
+        run: ls -al ./frontend
 
       # Backend setup
       - name: Install backend dependencies
