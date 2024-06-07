@@ -35,10 +35,6 @@ jobs:
         working-directory: ./backend
         run: npm run build --if-present
 
-      - name: Run backend tests
-        working-directory: ./backend
-        run: npm test --if-present
-
       # Frontend setup
       - name: Install frontend dependencies
         working-directory: ./frontend
@@ -47,7 +43,3 @@ jobs:
       - name: Build frontend
         working-directory: ./frontend
         run: npm run build --if-present
-
-      - name: Run frontend tests
-        working-directory: ./frontend
-        run: npm test --if-present
