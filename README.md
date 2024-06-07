@@ -1,6 +1,6 @@
 # NFL-Draft-Analysis-Tool
 
-## Software needed
+## Software Needed
 
 - Node.js and npm (Node Package Manager)
 - Express,js (backend)
