@@ -15,47 +15,45 @@ jobs:
         node-version: [14.x, 16.x, 18.x, 20.x]
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
 
-    - name: Debug: List root directory
-      run: ls -al /home/runner/work/NFL-Draft-Analysis-Tool/NFL-Draft-Analysis-Tool
+      - name: List root directory
+        run: ls -al /home/runner/work/NFL-Draft-Analysis-Tool/NFL-Draft-Analysis-Tool
 
-    - name: Debug: List backend directory
-      working-directory: ./backend
-      run: ls -al
+      - name: List backend directory
+        run: ls -al backend
 
-    - name: Debug: List frontend directory
-      working-directory: ./frontend
-      run: ls -al
+      - name: List frontend directory
+        run: ls -al frontend
 
-    # Backend setup
-    - name: Install backend dependencies
-      working-directory: ./backend
-      run: npm ci
+      # Backend setup
+      - name: Install backend dependencies
+        working-directory: ./backend
+        run: npm ci
 
-    - name: Build backend
-      working-directory: ./backend
-      run: npm run build --if-present
+      - name: Build backend
+        working-directory: ./backend
+        run: npm run build --if-present
 
-    - name: Run backend tests
-      working-directory: ./backend
-      run: npm test
+      - name: Run backend tests
+        working-directory: ./backend
+        run: npm test
 
-    # Frontend setup
-    - name: Install frontend dependencies
-      working-directory: ./frontend
-      run: npm ci
+      # Frontend setup
+      - name: Install frontend dependencies
+        working-directory: ./frontend
+        run: npm ci
 
-    - name: Build frontend
-      working-directory: ./frontend
-      run: npm run build --if-present
+      - name: Build frontend
+        working-directory: ./frontend
+        run: npm run build --if-present
 
-    - name: Run frontend tests
-      working-directory: ./frontend
-      run: npm test
+      - name: Run frontend tests
+        working-directory: ./frontend
+        run: npm test
