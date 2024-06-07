@@ -1,5 +1,7 @@
 # NFL Draft Analysis Tool
 
+[![Node.js CI](https://github.com/Tre-Vawn/NFL-Draft-Analysis-Tool/actions/workflows/node.js.yml/badge.svg)](https://github.com/Tre-Vawn/NFL-Draft-Analysis-Tool/actions/workflows/node.js.yml)
+
 ## Software Needed
 
 - Node.js and npm (Node Package Manager)
