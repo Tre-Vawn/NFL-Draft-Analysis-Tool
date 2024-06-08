@@ -2,21 +2,19 @@ const express = require("express");
 const connectDB = require("./config/db");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const helmet = require("helmet");
+const morgan = require("morgan");
 
-// Load environment variables from .env file
 dotenv.config();
 
-// Initialize the Express application
 const app = express();
 
-// Connect to MongoDB database
 connectDB();
 
-// Middleware to parse JSON requests
 app.use(express.json());
-
-// Use CORS middleware
 app.use(cors());
+app.use(helmet());
+app.use(morgan("tiny"));
 
 // Define routes
 app.use("/api/players", require("./routes/players"));

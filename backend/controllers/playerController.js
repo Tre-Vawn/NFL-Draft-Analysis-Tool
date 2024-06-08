@@ -5,12 +5,10 @@ const Player = require("../models/Player");
 const fetchPlayerFromAPI = async (playerName) => {
   try {
     const url = `https://replay.sportsdata.io/api/v3/nfl/scores/json/playersbyrookiedraftyear/2024off?key=${process.env.API_KEY}`;
-    console.log(`Fetching NFL data from URL: ${url}`);
+    console.log(`Fetching NFL data from for player: ${playerName}`);
 
     const response = await axios.get(url);
     const players = response.data;
-
-    console.log("NFL API response data:", players);
 
     // Filter players by name
     const player = players.find(
@@ -63,7 +61,7 @@ const getPlayerDetails = async (req, res) => {
       playerId: nflPlayer.PlayerID,
       name: `${nflPlayer.FirstName} ${nflPlayer.LastName}`,
       position: nflPlayer.Position,
-      team: nflPlayer.Team || "Unknown Team",
+      team: nflPlayer.Team || "Free Agent",
       age: nflPlayer.Age,
     });
 

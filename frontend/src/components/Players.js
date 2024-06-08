@@ -5,18 +5,23 @@ const Players = () => {
   const [players, setPlayers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResult, setSearchResult] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchPlayers = async () => {
+      setLoading(true);
       const data = await getPlayerList();
       setPlayers(data);
+      setLoading(false);
     };
     fetchPlayers();
   }, []);
 
   const handleSearch = async () => {
+    setLoading(true);
     const result = await getPlayerByName(searchTerm);
     setSearchResult(result);
+    setLoading(false);
   };
 
   return (
@@ -29,21 +34,27 @@ const Players = () => {
         onChange={(e) => setSearchTerm(e.target.value)}
       />
       <button onClick={handleSearch}>Search</button>
-      {searchResult && (
-        <div>
-          <h2>{searchResult.name}</h2>
-          <p>Position: {searchResult.position}</p>
-          <p>Team: {searchResult.team}</p>
-          <p>Age: {searchResult.age}</p>
-        </div>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          {searchResult && (
+            <div>
+              <h2>{searchResult.name}</h2>
+              <p>Position: {searchResult.position}</p>
+              <p>Team: {searchResult.team}</p>
+              <p>Age: {searchResult.age}</p>
+            </div>
+          )}
+          <ul>
+            {players.map((player) => (
+              <li key={player.playerId}>
+                {player.name} - {player.position}
+              </li>
+            ))}
+          </ul>
+        </>
       )}
-      <ul>
-        {players.map((player) => (
-          <li key={player.playerId}>
-            {player.name} - {player.position}
-          </li>
-        ))}
-      </ul>
     </div>
   );
 };

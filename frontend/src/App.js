@@ -11,6 +11,9 @@ function App() {
       <main>
         <Players />
       </main>
+      <footer>
+        <p>&copy; 2024 NFL Draft Analysis Tool</p>
+      </footer>
     </div>
   );
 }
