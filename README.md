@@ -23,4 +23,4 @@
 
 ## Functionality
 
-A user can prompt for various 2024 NFL Draft related information such as team's picks, prospect's college profiles, as well as their 2023 CFB statistics
+A user can use this tool to gain 2024 NFL Draft related information such as a prospect's profile and a team's picks.
