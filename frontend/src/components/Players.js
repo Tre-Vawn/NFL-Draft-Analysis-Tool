@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getPlayerList, getPlayerByName } from "../services/api";
+import "./Players.css";
 
 const Players = () => {
   const [players, setPlayers] = useState([]);
@@ -25,22 +26,24 @@ const Players = () => {
   };
 
   return (
-    <div>
-      <h1>Players</h1>
-      <input
-        type="text"
-        placeholder="Search for a player"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-      <button onClick={handleSearch}>Search</button>
+    <div className="players-container">
+      <h2>Search for a Player</h2>
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Search for a player"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button onClick={handleSearch}>Search</button>
+      </div>
       {loading ? (
         <p>Loading...</p>
       ) : (
         <>
           {searchResult && (
-            <div>
-              <h2>{searchResult.name}</h2>
+            <div className="player-details">
+              <h3>{searchResult.name}</h3>
               <p>Position: {searchResult.position}</p>
               <p>College: {searchResult.college}</p>
               <p>Team: {searchResult.team}</p>
@@ -50,7 +53,7 @@ const Players = () => {
               <p>Weight: {searchResult.weight}</p>
             </div>
           )}
-          <ul>
+          <ul className="player-list">
             {players.map((player) => (
               <li key={player.playerId}>
                 {player.name} - {player.position}
