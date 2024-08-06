@@ -42,8 +42,12 @@ const Players = () => {
             <div>
               <h2>{searchResult.name}</h2>
               <p>Position: {searchResult.position}</p>
+              <p>College: {searchResult.college}</p>
               <p>Team: {searchResult.team}</p>
+              <p>Number: {searchResult.number}</p>
               <p>Age: {searchResult.age}</p>
+              <p>Height: {searchResult.height}</p>
+              <p>Weight: {searchResult.weight}</p>
             </div>
           )}
           <ul>

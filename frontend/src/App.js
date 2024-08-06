@@ -9,7 +9,7 @@ function App() {
         <h1>NFL Draft Analysis Tool</h1>
       </header>
       <main>
-        <Players />
+        <Players/>
       </main>
       <footer>
         <p>&copy; 2024 NFL Draft Analysis Tool</p>
