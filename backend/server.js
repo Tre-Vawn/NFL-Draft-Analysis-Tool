@@ -4,12 +4,15 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
+const { fetchAndStoreAllPlayers } = require("./controllers/playerController");
 
 dotenv.config();
 
 const app = express();
 
 connectDB();
+
+fetchAndStoreAllPlayers();
 
 app.use(express.json());
 app.use(cors());
