@@ -1,22 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { getPlayerList, getPlayerByName } from "../services/api";
+import React, { useState } from "react";
+import { getPlayerByName } from "../services/api";
 import "./Players.css";
 
 const Players = () => {
-  const [players, setPlayers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResult, setSearchResult] = useState(null);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchPlayers = async () => {
-      setLoading(true);
-      const data = await getPlayerList();
-      setPlayers(data);
-      setLoading(false);
-    };
-    fetchPlayers();
-  }, []);
 
   const handleSearch = async () => {
     setLoading(true);
@@ -53,13 +42,6 @@ const Players = () => {
               <p>Weight: {searchResult.weight}</p>
             </div>
           )}
-          <ul className="player-list">
-            {players.map((player) => (
-              <li key={player.playerId}>
-                {player.name} - {player.position}
-              </li>
-            ))}
-          </ul>
         </>
       )}
     </div>
