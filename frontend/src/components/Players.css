@@ -32,7 +32,16 @@
     background-color: #444;
     text-align: left;
   }
-  
+
+  .compare-section {
+    margin-top: 20px
+  }
+
+  .compare-players {
+    display: flex;
+    justify-content: space-around;
+  }
+
   .player-list {
     list-style-type: none;
     padding: 0;

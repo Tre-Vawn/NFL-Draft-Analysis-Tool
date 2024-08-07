@@ -8,11 +8,12 @@ const Players = () => {
   const [searchResult, setSearchResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
+  const [comparePlayers, setComparePlayers] = useState([]);
 
   useEffect(() => {
     const fetchPlayers = async () => {
-      const playerList = await getPlayerList();
-      setPlayers(playerList);
+      const data = await getPlayerList();
+      setPlayers(data);
     };
     fetchPlayers();
   }, []);
@@ -22,30 +23,30 @@ const Players = () => {
     const result = await getPlayerByName(searchTerm);
     setSearchResult(result);
     setLoading(false);
-    setSuggestions([]);
+    setSuggestions([]); // Clear suggestions after search
   }, [searchTerm]);
 
   useEffect(() => {
     const handleGlobalKeyDown = (e) => {
-      if (e.key === "Enter") {
+      if (e.key === 'Enter') {
         handleSearch();
       }
     };
-    window.addEventListener("keydown", handleGlobalKeyDown);
+    window.addEventListener('keydown', handleGlobalKeyDown);
 
     return () => {
-      window.removeEventListener("keydown", handleGlobalKeyDown);
+      window.removeEventListener('keydown', handleGlobalKeyDown);
     };
-  }, [handleSearch]); //Ensure the effect re-runs if searchTerm changes
+  }, [handleSearch]);
 
   const handleChange = (e) => {
     const value = e.target.value;
     setSearchTerm(value);
     if (value.length > 1) {
-      const suggestions = players.filter((player) =>
-        player.name.toLowerCase().includes(value.toLowerCase())
+      const filteredSuggestions = players.filter(player =>
+        player.name.toLowerCase().startsWith(value.toLowerCase())
       );
-      setSuggestions(suggestions);
+      setSuggestions(filteredSuggestions);
     } else {
       setSuggestions([]);
     }
@@ -54,8 +55,20 @@ const Players = () => {
   const handleSuggestionClick = (suggestion) => {
     setSearchTerm(suggestion.name);
     setSuggestions([]);
-    handleSearch();
-  }
+    handleSearch(); // Trigger search on suggestion click
+  };
+
+  const handleCompare = (player) => {
+    if (comparePlayers.length < 2) {
+      setComparePlayers([...comparePlayers, player]);
+    } else {
+      alert("You can only compare two players at a time.");
+    }
+  };
+
+  const handleRemoveCompare = (playerId) => {
+    setComparePlayers(comparePlayers.filter(player => player.playerId !== playerId));
+  };
 
   return (
     <div className="players-container">
@@ -66,6 +79,9 @@ const Players = () => {
           placeholder="Search for a player"
           value={searchTerm}
           onChange={handleChange}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') handleSearch();
+          }}
         />
         <button onClick={handleSearch}>Search</button>
       </div>
@@ -83,6 +99,7 @@ const Players = () => {
               <p>Age: {searchResult.age}</p>
               <p>Height: {searchResult.height}</p>
               <p>Weight: {searchResult.weight}</p>
+              <button onClick={() => handleCompare(searchResult)}>Compare</button>
             </div>
           )}
           {suggestions.length > 0 && (
@@ -98,6 +115,26 @@ const Players = () => {
             </ul>
           )}
         </>
+      )}
+      {comparePlayers.length > 0 && (
+        <div className="compare-section">
+          <h3>Compare Players</h3>
+          <div className="compare-players">
+            {comparePlayers.map(player => (
+              <div key={player.playerId} className="compare-player">
+                <h3>{player.name}</h3>
+                <p>Position: {player.position}</p>
+                <p>College: {player.college}</p>
+                <p>Team: {player.team}</p>
+                <p>Number: {player.number}</p>
+                <p>Age: {player.age}</p>
+                <p>Height: {player.height}</p>
+                <p>Weight: {player.weight}</p>
+                <button onClick={() => handleRemoveCompare(player.playerId)}>Remove</button>
+              </div>
+            ))}
+          </div>
+        </div>
       )}
     </div>
   );
